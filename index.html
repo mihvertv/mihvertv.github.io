@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mihver TV | Güncel Haberler</title>
+
+    <meta name="description" content="Mihver TV - Türkiye ve dünyadan güncel haberler.">
+    <meta name="keywords" content="Mihver TV, haber, son dakika, Türkiye, dünya, ekonomi, spor, teknoloji">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1b1b1b;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ÜST BİLGİ ÇUBUĞU */
+
+        .topbar {
+            background: #111;
+            color: white;
+            font-size: 13px;
+            padding: 8px 0;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .topbar-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* LOGO ALANI */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-main {
+            min-height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #111;
+        }
+
+        .logo span {
+            color: #d71920;
+        }
+
+        .logo-sub {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .date-box {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* MENÜ */
+
+        nav {
+            background: #d71920;
+            color: white;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .menu a {
+            padding: 14px 17px;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: .2s;
+        }
+
+        .menu a:hover {
+            background: #aa1016;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        /* SON DAKİKA */
+
+        .breaking {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .breaking-inner {
+            display: flex;
+            align-items: center;
+            min-height: 45px;
+        }
+
+        .breaking-title {
+            background: #111;
+            color: white;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .breaking-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ANA ALAN */
+
+        main {
+            padding: 25px 0 50px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
+        }
+
+        /* MANŞET */
+
+        .hero {
+            position: relative;
+            min-height: 430px;
+            border-radius: 8px;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,.1),
+                    rgba(0,0,0,.78)
+                ),
+                url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80")
+                center/cover;
+            color: white;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-content {
+            padding: 28px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #d71920;
+            color: white;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #ddd;
+            font-size: 15px;
+        }
+
+        /* YAN HABERLER */
+
+        .side-news {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 7px;
+            overflow: hidden;
+            border: 1px solid #e1e1e1;
+            transition: .2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 13px;
+        }
+
+        .news-content h3 {
+            font-size: 17px;
+            line-height: 1.3;
+        }
+
+        .news-date {
+            display: block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* BÖLÜM */
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .section-title h2 {
+            font-size: 23px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 5px;
+            height: 25px;
+            background: #d71920;
+            border-radius: 3px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .news-grid .news-card img {
+            height: 180px;
+        }
+
+        /* ALT KATEGORİLER */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .category-box {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .category-box:hover {
+            background: #d71920;
+            color: white;
+        }
+
+        .category-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+            margin-top: 30px;
+            padding: 35px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        footer h3 {
+            margin-bottom: 12px;
+        }
+
+        footer p,
+        footer li {
+            color: #bbb;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* MOBİL */
+
+        @media (max-width: 800px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .header-main {
+                min-height: 75px;
+            }
+
+            .logo {
+                font-size: 27px;
+            }
+
+            .date-box {
+                display: none;
+            }
+
+            .menu a {
+                padding: 13px 12px;
+                font-size: 12px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 350px;
+            }
+
+            .hero h1 {
+                font-size: 25px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breaking-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .topbar-inner {
+                justify-content: center;
+            }
+
+            .topbar-inner span:last-child {
+                display: none;
+            }
+
+            .hero {
+                min-height: 300px;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .hero h1 {
+                font-size: 22px;
+            }
+
+            .categories {
+                gap: 10px;
+            }
+
+            .category-box {
+                padding: 18px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ÜST ÇUBUK -->
+
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <span>Türkiye ve dünyadan haberler</span>
+            <span id="today"></span>
+        </div>
+    </div>
+
+
+    <!-- LOGO -->
+
+    <header>
+        <div class="container header-main">
+
+            <div>
+                <div class="logo">
+                    MİHVER <span>TV</span>
+                </div>
+
+                <span class="logo-sub">
+                    HABERİN MERKEZİ
+                </span>
+            </div>
+
+            <div class="date-box">
+                Güncel Haberler
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- MENÜ -->
+
+    <nav>
+        <div class="container menu">
+
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Son Dakika</a>
+            <a href="#">Türkiye</a>
+            <a href="#">Dünya</a>
+            <a href="#">Ekonomi</a>
+            <a href="#">Spor</a>
+            <a href="#">Teknoloji</a>
+            <a href="#">Yaşam</a>
+
+        </div>
+    </nav>
+
+
+    <!-- SON DAKİKA -->
+
+    <div class="breaking">
+
+        <div class="container breaking-inner">
+
+            <div class="breaking-title">
+                🔴 SON DAKİKA
+            </div>
+
+            <div class="breaking-text">
+                Mihver TV'ye hoş geldiniz. Güncel gelişmeler burada.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANA İÇERİK -->
+
+    <main>
+
+        <div class="container">
+
+            <div class="main-grid">
+
+
+                <!-- MANŞET -->
+
+                <a href="#" class="hero">
+
+                    <div class="hero-content">
+
+                        <span class="category">
+                            GÜNDEM
+                        </span>
+
+                        <h1>
+                            Mihver TV yayın hayatına başladı
+                        </h1>
+
+                        <p>
+                            Türkiye ve dünyadan gelişmeleri
+                            takip edebileceğiniz yeni haber
+                            platformunuz Mihver TV.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <!-- YAN HABERLER -->
+
+                <div class="side-news">
+
+                    <a href="#" class="news-card">
+
+                        <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=800&q=80">
+
+                        <div class="news-content">
+
+                            <h3>
+                                Türkiye gündeminden öne çıkan gelişmeler
+                            </h3>
+
+                            <span class="news-date">
+                                Bugün · Gündem
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="news-card">
+
+                        <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=80">
+
+                        <div class="news-content">
+
+                            <h3>
+                                Dünyadan günün önemli haberleri
+                            </h3>
+
+                            <span class="news-date">
+                                Bugün · Dünya
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SON HABERLER -->
+
+            <section class="section">
+
+                <div class="section-title">
+                    <h2>Son Haberler</h2>
+                </div>
+
+                <div class="news-grid">
+
+
+                    <a href="#" class="news-card">
+
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80">
+
+                        <div class="news-content">
+
+                            <h3>
+                                Günün önemli gelişmeleri yakından takip ediliyor
+                            </h3>
+
+                            <span class="news-date">
+                                5 dakika önce
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="news-card">
+
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80">
+
+                        <div class="news-content">
+
+                            <h3>
+                                Ekonomi gündemindeki son gelişmeler
+                            </h3>
+
+                            <span class="news-date">
+                                15 dakika önce
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="news-card">
+
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80">
+
+                        <div class="news-content">
+
+                            <h3>
+                                Spor dünyasından son gelişmeler
+                            </h3>
+
+                            <span class="news-date">
+                                25 dakika önce
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- KATEGORİLER -->
+
+            <section class="section">
+
+                <div class="section-title">
+                    <h2>Haber Kategorileri</h2>
+                </div>
+
+                <div class="categories">
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">🇹🇷</div>
+                        Türkiye
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">🌍</div>
+                        Dünya
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">💰</div>
+                        Ekonomi
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">⚽</div>
+                        Spor
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">💻</div>
+                        Teknoloji
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">🎭</div>
+                        Kültür
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">❤️</div>
+                        Yaşam
+                    </a>
+
+                    <a href="#" class="category-box">
+                        <div class="category-icon">🎥</div>
+                        Video
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <h3>MİHVER TV</h3>
+
+                    <p>
+                        Türkiye ve dünyadan gelişmeleri
+                        takip edebileceğiniz haber platformu.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3>Kategoriler</h3>
+
+                    <ul>
+
+                        <li>Türkiye</li>
+                        <li>Dünya</li>
+                        <li>Ekonomi</li>
+                        <li>Spor</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+                    <h3>Mihver TV</h3>
+
+                    <ul>
+
+                        <li>Hakkımızda</li>
+                        <li>İletişim</li>
+                        <li>Gizlilik</li>
+                        <li>Çerez Politikası</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="copyright">
+
+                © 2026 Mihver TV. Tüm hakları saklıdır.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const today = new Date();
+
+        const dateText = today.toLocaleDateString(
+            "tr-TR",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+        document.getElementById("today").textContent = dateText;
+
+    </script>
+
+</body>
+</html>
